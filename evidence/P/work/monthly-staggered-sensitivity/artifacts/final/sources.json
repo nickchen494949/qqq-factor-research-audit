@@ -1,0 +1,116 @@
+{
+  "aggregate_sha256": "a293f9cad240ed984c4b6dea12220a5272e11993d14a8fec0b5b423e40adedfb",
+  "created_at_utc": "2026-08-29T05:36:18.093254+00:00",
+  "file_count": 20,
+  "files": [
+    {
+      "bytes": 67408,
+      "path": "outputs/NDX_IMPLIED_FORWARD_EPS_PROXY_SINCE_2009.csv",
+      "sha256": "1e4f09b802c5284b9e03b2619647a502b556b21d3e11a80ed172e5cb7d34be68"
+    },
+    {
+      "bytes": 77060,
+      "path": "work/evidence/fred-baa10y/2026-08-29/raw/BAA10Y.csv",
+      "sha256": "3969cb5fafb8b5327bd864a7fc774cabb77cb1a9fb72e815ba3f76bdc5279806"
+    },
+    {
+      "bytes": 73887,
+      "path": "work/evidence/fred-dfii10/2026-08-28/raw/DFII10.csv",
+      "sha256": "bc35a13b360a4e4067ba231a2d5d777e16a7ec1144e61d8aabcacd764724ed87"
+    },
+    {
+      "bytes": 5139,
+      "path": "work/evidence/fred-g7-ca/2026-08-29/raw/IR3TIB01CAM156N.csv",
+      "sha256": "f42d602059d5a2b08ec24e776a58ba0d64ef1cfd8d66fdfd4fd5056e8f5e0e67"
+    },
+    {
+      "bytes": 6629,
+      "path": "work/evidence/fred-g7-ea/2026-08-29/raw/IR3TIB01EZM156N.csv",
+      "sha256": "708215c12778488255d83f33be967d656743aca6f06b257de13c6dfd8aff0041"
+    },
+    {
+      "bytes": 4272,
+      "path": "work/evidence/fred-g7-jp/2026-08-29/raw/IR3TIB01JPM156N.csv",
+      "sha256": "e384ee99da476ec1abaca64452156aeeae5adea5b7adc268967b42e2c672a6d2"
+    },
+    {
+      "bytes": 4156,
+      "path": "work/evidence/fred-g7-uk/2026-08-29/raw/IR3TIB01GBM156N.csv",
+      "sha256": "1948ad4d8e803de29703fedc5599ff6b6d9bf481b18f23df4ec0a6f2bd43a646"
+    },
+    {
+      "bytes": 3581,
+      "path": "work/evidence/fred-g7-us/2026-08-29/raw/IR3TIB01USM156N.csv",
+      "sha256": "28f7039795245e7ef4c9e54f14a0acadf8026f2146a9c8e92dd632c9fce8f34b"
+    },
+    {
+      "bytes": 81994,
+      "path": "work/evidence/fred-vix/2026-08-29/raw/VIXCLS.csv",
+      "sha256": "2bfa06179e6bcc06798577fdf94675d7ab58de561690ce2bf96019c6d2769477"
+    },
+    {
+      "bytes": 307019,
+      "path": "work/evidence/nasdaq-giw-ndx-price/2026-08-28T092029Z/raw/NDX-history-2001-01-01_to_2026-08-28.xlsx",
+      "sha256": "36396c0c07035c7dfc12d210b05473fd3bf8b975602b03b2f772aae5862752fd"
+    },
+    {
+      "bytes": 267430,
+      "path": "work/evidence/nasdaq-giw-ndxe/2026-08-28/raw/NDXE-history-2005-06-20_to_2026-08-28.xlsx",
+      "sha256": "9deea1de5fa8f00808fa0b5d2336d75794cc0e26b7b1b8ff03ea2de16f50b186"
+    },
+    {
+      "bytes": 122926,
+      "path": "work/evidence/oecd-cli-current/2026-08-29/raw/oecd_cli_korea_g20_current.csv",
+      "sha256": "7d2e18b1eac3dcbbff7b3e4561a7ea22f3604319a7ab4ca2a5ea20e93930b4c3"
+    },
+    {
+      "bytes": 483051,
+      "path": "work/evidence/qqq-proxy-backtest/raw/chartexchange-qqq.html",
+      "sha256": "cd2069b1cb3872e7dd4e527c4828f2e970becc7e214f28ab08f40ace8d965c1c"
+    },
+    {
+      "bytes": 351738,
+      "path": "work/evidence/qqq-proxy-backtest/raw/qqq-macrotrends-github.csv",
+      "sha256": "2410b40a69b30644046b10c7b0ada861d45f67b02f22cfd10452821885d58aff"
+    },
+    {
+      "bytes": 4383,
+      "path": "work/monthly-staggered-sensitivity/PREREGISTRATION.md",
+      "sha256": "17f911803112e487779805c0726992565d954e0d0039796004eb3eed5f66774e"
+    },
+    {
+      "bytes": 3278,
+      "path": "work/monthly-staggered-sensitivity/SOURCE_MAP.md",
+      "sha256": "7bc941c37ac009030343ce364c606e4b8cf86beceee646131d195c5afa8567e7"
+    },
+    {
+      "bytes": 40649,
+      "path": "work/network-reaudit-batch2/m3-sloos/normalized/m3_monthly.csv",
+      "sha256": "96df659177ec8db6644f11f67cbbb782210256c9db89b7fc20d0cdb5428f48a4"
+    },
+    {
+      "bytes": 3535,
+      "path": "work/network-reaudit-batch2/m3-sloos/normalized/sloos_quarterly.csv",
+      "sha256": "93be3d44278376cb61a3ad059c952c830653ea11ef4bcbbf19dcdaf10d188922"
+    },
+    {
+      "bytes": 11289,
+      "path": "work/network-reaudit-batch2/qfr/derived/qfr_current_vintage.csv",
+      "sha256": "e0119726a721d0c80a6abc830f8878102924ea07972bbd438fd2888bdea1f62a"
+    },
+    {
+      "bytes": 28385,
+      "path": "work/network-reaudit-batch2/z1/derived/z1_current_vintage_series.csv",
+      "sha256": "82bc7d672d05f5af6e34dd01f04fc48931847de68df8a4c609e24e930d156a72"
+    }
+  ],
+  "hash_algorithm": "sha256",
+  "root_label": "monthly-four-cohort-frozen-inputs",
+  "schema_version": "research-provenance/v1",
+  "source": {
+    "label": "Frozen local collection from SOURCE_MAP",
+    "notes": "Upstream retrieval metadata remains in each evidence directory.",
+    "retrieved_at_utc": "2026-08-29T05:36:18.093254+00:00"
+  },
+  "total_bytes": 1947809
+}

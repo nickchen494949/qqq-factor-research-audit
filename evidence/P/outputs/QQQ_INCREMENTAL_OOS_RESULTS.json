@@ -1,0 +1,225 @@
+{
+  "contract": {
+    "testStart": "2017-01-01",
+    "training": "expanding; outcome end date must precede signal date",
+    "baseline": "training-standardized OLS using past 63d QQQ return",
+    "severe": "future 63d worst return <= -10%",
+    "model": "add candidate features to baseline; severe uses clipped linear probability"
+  },
+  "sample": {
+    "n": 37,
+    "severeEvents": 7,
+    "years": [
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+      "2025",
+      "2026"
+    ]
+  },
+  "candidates": {
+    "breadth": {
+      "n": 37,
+      "returnRmse": 0.1129411339615228,
+      "baselineReturnRmse": 0.11258570376040362,
+      "returnMae": 0.08606763674600618,
+      "baselineReturnMae": 0.08581529594211795,
+      "returnImprovement": -0.0031569745469244292,
+      "returnYearWinRate": 0.7,
+      "severeBrier": 0.17235703608690173,
+      "baselineSevereBrier": 0.17081804999875846,
+      "severeImprovement": -0.009009505073699353,
+      "severeYearWinRate": 0.6,
+      "pass": false,
+      "yearly": [
+        {
+          "year": "2017",
+          "returnWin": true,
+          "riskWin": false
+        },
+        {
+          "year": "2018",
+          "returnWin": true,
+          "riskWin": true
+        },
+        {
+          "year": "2019",
+          "returnWin": false,
+          "riskWin": true
+        },
+        {
+          "year": "2020",
+          "returnWin": false,
+          "riskWin": false
+        },
+        {
+          "year": "2021",
+          "returnWin": true,
+          "riskWin": true
+        },
+        {
+          "year": "2022",
+          "returnWin": false,
+          "riskWin": true
+        },
+        {
+          "year": "2023",
+          "returnWin": true,
+          "riskWin": false
+        },
+        {
+          "year": "2024",
+          "returnWin": true,
+          "riskWin": true
+        },
+        {
+          "year": "2025",
+          "returnWin": true,
+          "riskWin": false
+        },
+        {
+          "year": "2026",
+          "returnWin": true,
+          "riskWin": true
+        }
+      ]
+    },
+    "real_yield": {
+      "n": 37,
+      "returnRmse": 0.10995583879355962,
+      "baselineReturnRmse": 0.11258570376040362,
+      "returnMae": 0.0816463513406578,
+      "baselineReturnMae": 0.08581529594211795,
+      "returnImprovement": 0.023358782500846442,
+      "returnYearWinRate": 0.6,
+      "severeBrier": 0.17250914835906322,
+      "baselineSevereBrier": 0.17081804999875846,
+      "severeImprovement": -0.009899998040705071,
+      "severeYearWinRate": 0.4,
+      "pass": true,
+      "yearly": [
+        {
+          "year": "2017",
+          "returnWin": false,
+          "riskWin": false
+        },
+        {
+          "year": "2018",
+          "returnWin": false,
+          "riskWin": false
+        },
+        {
+          "year": "2019",
+          "returnWin": false,
+          "riskWin": false
+        },
+        {
+          "year": "2020",
+          "returnWin": true,
+          "riskWin": false
+        },
+        {
+          "year": "2021",
+          "returnWin": true,
+          "riskWin": true
+        },
+        {
+          "year": "2022",
+          "returnWin": true,
+          "riskWin": true
+        },
+        {
+          "year": "2023",
+          "returnWin": true,
+          "riskWin": false
+        },
+        {
+          "year": "2024",
+          "returnWin": true,
+          "riskWin": false
+        },
+        {
+          "year": "2025",
+          "returnWin": true,
+          "riskWin": true
+        },
+        {
+          "year": "2026",
+          "returnWin": false,
+          "riskWin": true
+        }
+      ]
+    },
+    "both": {
+      "n": 37,
+      "returnRmse": 0.11052765903827613,
+      "baselineReturnRmse": 0.11258570376040362,
+      "returnMae": 0.08233562631399968,
+      "baselineReturnMae": 0.08581529594211795,
+      "returnImprovement": 0.018279805103028623,
+      "returnYearWinRate": 0.8,
+      "severeBrier": 0.17335606375237012,
+      "baselineSevereBrier": 0.17081804999875846,
+      "severeImprovement": -0.014857995121886125,
+      "severeYearWinRate": 0.6,
+      "pass": false,
+      "yearly": [
+        {
+          "year": "2017",
+          "returnWin": true,
+          "riskWin": false
+        },
+        {
+          "year": "2018",
+          "returnWin": true,
+          "riskWin": true
+        },
+        {
+          "year": "2019",
+          "returnWin": false,
+          "riskWin": true
+        },
+        {
+          "year": "2020",
+          "returnWin": false,
+          "riskWin": false
+        },
+        {
+          "year": "2021",
+          "returnWin": true,
+          "riskWin": true
+        },
+        {
+          "year": "2022",
+          "returnWin": true,
+          "riskWin": true
+        },
+        {
+          "year": "2023",
+          "returnWin": true,
+          "riskWin": false
+        },
+        {
+          "year": "2024",
+          "returnWin": true,
+          "riskWin": true
+        },
+        {
+          "year": "2025",
+          "returnWin": true,
+          "riskWin": false
+        },
+        {
+          "year": "2026",
+          "returnWin": true,
+          "riskWin": true
+        }
+      ]
+    }
+  }
+}

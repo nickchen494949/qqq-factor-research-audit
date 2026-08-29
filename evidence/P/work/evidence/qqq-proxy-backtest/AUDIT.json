@@ -1,0 +1,26 @@
+{
+  "status": "APPROVE_WITH_LIMITATION",
+  "checked_at": "2026-08-28T10:16:19.358Z",
+  "qqq_rows": 6910,
+  "qqq_range": [
+    "1999-03-10",
+    "2026-08-27"
+  ],
+  "extension_rows": 370,
+  "overlap_rows": 2,
+  "overlap_prices_identical": true,
+  "max_calendar_gap_days": 7,
+  "forecast_rows": 1191,
+  "all_entry_dates_after_signal": true,
+  "all_horizon_returns_recomputed": true,
+  "manual_sample": {
+    "signal": "2001-05-04",
+    "entry": "2001-05-07",
+    "entry_close": 40.1803,
+    "target": "2001-05-14",
+    "target_close": 38.1543,
+    "return": -0.05042271959144162,
+    "pass": true
+  },
+  "errors": []
+}

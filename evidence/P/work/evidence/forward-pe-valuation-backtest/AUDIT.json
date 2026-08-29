@@ -1,0 +1,21 @@
+{
+  "verdict": "PASS_REPRODUCIBILITY",
+  "checks": {
+    "input_hash": true,
+    "contract_hash": true,
+    "code_hash": true,
+    "all_trade_dates_after_signal": true,
+    "untradable_only_at_end": true,
+    "reference_minimum": true,
+    "percentile_range": true,
+    "binary_targets": true,
+    "curve_sorted_unique": true,
+    "binary_positions": true,
+    "same_end_date": true,
+    "output_hashes": true
+  },
+  "counts": {
+    "signals": 1083,
+    "curve_rows": 5605
+  }
+}

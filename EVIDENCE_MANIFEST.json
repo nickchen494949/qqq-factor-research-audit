@@ -1,0 +1,490 @@
+{
+  "aggregate_sha256": "72ae937b37706c2a6d508add41be4ef910609dbbfdc427d83ff7f7b37a44f8c0",
+  "claims": [
+    {
+      "claim": "研究从直接aggregate EPS数据门开始，并禁止继续2,745行重建",
+      "evidence_ids": [
+        "E01",
+        "E02",
+        "E03",
+        "E04"
+      ],
+      "id": "C01"
+    },
+    {
+      "claim": "免费精确NDX/QQQ aggregate EPS/Forward EPS/revision数据门为BLOCK",
+      "evidence_ids": [
+        "E05",
+        "E06",
+        "E07"
+      ],
+      "id": "C02"
+    },
+    {
+      "claim": "免费Forward P/E及隐含EPS只能标PROXY，形状核验不能解决vintage",
+      "evidence_ids": [
+        "E08",
+        "E09"
+      ],
+      "id": "C03"
+    },
+    {
+      "claim": "隐含EPS方向与Forward P/E固定历史策略均未胜过QQQ简单基准",
+      "evidence_ids": [
+        "E10",
+        "E11",
+        "E12",
+        "E13"
+      ],
+      "id": "C04"
+    },
+    {
+      "claim": "统一63日合同、单因素与增量测试按冻结门槛执行",
+      "evidence_ids": [
+        "E14",
+        "E15",
+        "E16",
+        "E17",
+        "E18",
+        "E19"
+      ],
+      "id": "C05"
+    },
+    {
+      "claim": "实际利率、VIX与全球降息广度的固定策略均REJECT",
+      "evidence_ids": [
+        "E20",
+        "E21",
+        "E22",
+        "E23"
+      ],
+      "id": "C06"
+    },
+    {
+      "claim": "商品、供应链、半导体、需求与运输没有新增生产因子",
+      "evidence_ids": [
+        "E24"
+      ],
+      "id": "C07"
+    },
+    {
+      "claim": "Carry、拥挤及固定复杂交互没有稳定增量",
+      "evidence_ids": [
+        "E25",
+        "E26",
+        "E27"
+      ],
+      "id": "C08"
+    },
+    {
+      "claim": "网络补漏的新基本面、融资与杠杆候选均未过正式门",
+      "evidence_ids": [
+        "E28",
+        "E29"
+      ],
+      "id": "C09"
+    },
+    {
+      "claim": "old8+new4季度组合因39<40而BLOCK_SAMPLE且实质门失败",
+      "evidence_ids": [
+        "E30",
+        "E31",
+        "E32"
+      ],
+      "id": "C10"
+    },
+    {
+      "claim": "月度四相位仅1/4组通过，正式REJECT_TIMING_ROBUSTNESS",
+      "evidence_ids": [
+        "E33",
+        "E34",
+        "E35",
+        "E37",
+        "E38",
+        "E39"
+      ],
+      "id": "C11"
+    },
+    {
+      "claim": "真正未来EPS与实际利率路线已冻结但尚无成熟结果",
+      "evidence_ids": [
+        "E40",
+        "E44"
+      ],
+      "id": "C12"
+    },
+    {
+      "claim": "全部历史路线最终没有新增生产因子或策略",
+      "evidence_ids": [
+        "E46"
+      ],
+      "id": "C13"
+    }
+  ],
+  "file_count": 39,
+  "files": [
+    {
+      "bytes": 3130,
+      "id": "E01",
+      "path": "PROJECT_STATE.md",
+      "root": "S",
+      "sha256": "8006ee49f19575c680411727789434ac7daf04aec27ad9d9782ebf8f96bed7b3"
+    },
+    {
+      "bytes": 2260,
+      "id": "E02",
+      "path": "NORTH_STAR.md",
+      "root": "S",
+      "sha256": "e09064188f29a3ec1c180058d9e47bcc3d470bd631f6a9fe9f7d952228e4a3b5"
+    },
+    {
+      "bytes": 1196,
+      "id": "E03",
+      "original_sha256": "58df05f69e15597035169901c16315c8d08ca98f25952b0f1495c623611cf200",
+      "path": "RESTART_PROMPT.md",
+      "redacted": true,
+      "redaction_reason": "Local paths or prospective tracking details removed from GitHub derivative.",
+      "root": "S",
+      "sha256": "5778969ff8a543212a4aeda584861b78dfbefde578ff29f84a2d84ffdd00ad62"
+    },
+    {
+      "bytes": 8494,
+      "id": "E04",
+      "original_sha256": "b0ac0892224df52602e5c509c71036697bf7c0d8e03b03cccc3824ed1c0be0ff",
+      "path": "artifacts/eps-feasibility-old/FEASIBILITY_REPORT.md",
+      "redacted": true,
+      "redaction_reason": "Local paths or prospective tracking details removed from GitHub derivative.",
+      "root": "S",
+      "sha256": "82a9436156a23c04030e1e0895df9327190b275e3710efa86f9736ea929a9fed"
+    },
+    {
+      "bytes": 2045,
+      "id": "E05",
+      "path": "artifacts/nasdaq-anchor-evidence/verdict.json",
+      "root": "S",
+      "sha256": "5ffeaf5c69203327f09f8a9dece262b46010f6e913e15047b670a537bd197499"
+    },
+    {
+      "bytes": 3943,
+      "id": "E06",
+      "path": "artifacts/nasdaq-anchor-evidence/audit_report.md",
+      "root": "S",
+      "sha256": "0f9a4fdbe13b967d125add7c02492d84be073042031b761cda1be793a191d74e"
+    },
+    {
+      "bytes": 9620,
+      "id": "E07",
+      "path": "outputs/QQQ_EPS_DATA_SOURCE_FEASIBILITY.md",
+      "root": "P",
+      "sha256": "8ce78dbf9f006d96d9c2e2c665ad9550f39e835a417debb5b118cf6ca6438d73"
+    },
+    {
+      "bytes": 2598,
+      "id": "E08",
+      "path": "outputs/QQQ_FORWARD_PE_DATA_REALITY_CHECK.md",
+      "root": "P",
+      "sha256": "27b9213b894cdd9921a748c51937fae3ce23cf85d4e3312c783695c576fd9877"
+    },
+    {
+      "bytes": 1136,
+      "id": "E09",
+      "path": "outputs/NDX_EPS_PROXY_SHAPE_COMPARISON.md",
+      "root": "P",
+      "sha256": "2fe11dabd53ca9118de18d7c316200dfde43ab5f7358c4d77ed677595ae7a718"
+    },
+    {
+      "bytes": 1363,
+      "id": "E10",
+      "path": "outputs/QQQ_PROXY_BACKTEST_RESULTS.md",
+      "root": "P",
+      "sha256": "83f4f5d19f723e86fec398a03b2b5207a236201b19d654b467fc74404625c846"
+    },
+    {
+      "bytes": 617,
+      "id": "E11",
+      "path": "work/evidence/qqq-proxy-backtest/AUDIT.json",
+      "root": "P",
+      "sha256": "61897879dbbf8e179ec81cbe786732d8451c33994484b9ea4eedfeadb2835736"
+    },
+    {
+      "bytes": 3776,
+      "id": "E12",
+      "path": "outputs/QQQ_FORWARD_PE_AUDIT.md",
+      "root": "P",
+      "sha256": "c1b693a8e1698f7131875b5b6ee2dfee01d0a2347c928a674b031d14a99c05d4"
+    },
+    {
+      "bytes": 479,
+      "id": "E13",
+      "path": "work/evidence/forward-pe-valuation-backtest/AUDIT.json",
+      "root": "P",
+      "sha256": "794454c431cee93051f2c584b63e3f0320e8b2917742da1a0e570965945856b6"
+    },
+    {
+      "bytes": 1287,
+      "id": "E14",
+      "path": "outputs/QQQ_UNIFIED_TEST_CONTRACT.md",
+      "root": "P",
+      "sha256": "64e522b5db1cfe78e21d6187942a6e3da0dc211351bacbd691a0722c48d46015"
+    },
+    {
+      "bytes": 784,
+      "id": "E15",
+      "path": "outputs/QQQ_EPS_DIRECTION_DIAGNOSTIC.md",
+      "root": "P",
+      "sha256": "7c8bb814493289898aec85da549be7ffe65a145c92006704ec39ab1507f0595d"
+    },
+    {
+      "bytes": 934,
+      "id": "E16",
+      "path": "outputs/QQQ_PE_REAL_YIELD_UNIFORM_DIAGNOSTIC.md",
+      "root": "P",
+      "sha256": "0a8282fd1cf51ca8317f5e398840b8457970f9c5e2fe23e4bb73abe9883f4e43"
+    },
+    {
+      "bytes": 951,
+      "id": "E17",
+      "path": "outputs/QQQ_NFCI_BREADTH_DIAGNOSTIC.md",
+      "root": "P",
+      "sha256": "d3c9f14861540b22f556d79fb52701116469dc00367e4b54dbaee4c238e757c8"
+    },
+    {
+      "bytes": 2341,
+      "id": "E18",
+      "path": "outputs/QQQ_MISSING_FACTOR_DIAGNOSTIC.md",
+      "root": "P",
+      "sha256": "c4f6b57f245f717dd3d9256e36a85c7643b337b3086df2f61fe176e5504137da"
+    },
+    {
+      "bytes": 5210,
+      "id": "E19",
+      "path": "outputs/QQQ_INCREMENTAL_OOS_RESULTS.json",
+      "root": "P",
+      "sha256": "c9d9cc97f34cd721cc87c437a94423b406a83a5194477b51ca72ef5e18eb7858"
+    },
+    {
+      "bytes": 1548,
+      "id": "E20",
+      "path": "outputs/QQQ_REAL_YIELD_CHALLENGER_RESULTS.json",
+      "root": "P",
+      "sha256": "0629e0a88fd84dcac7bfa1d2a413a7168107d1a78e365f3310be353953baf740"
+    },
+    {
+      "bytes": 1482,
+      "id": "E21",
+      "path": "outputs/QQQ_VIX_CONTRARIAN_RESULTS.json",
+      "root": "P",
+      "sha256": "b2c70ef42c669e3559c8feee4e964bd9bad7e0a4b9f0b2c6cb1b03e6d7c69d94"
+    },
+    {
+      "bytes": 3036,
+      "id": "E22",
+      "path": "outputs/QQQ_G7_FUNDING_AUDIT.md",
+      "root": "P",
+      "sha256": "463d7f7f74baa52a6585346179231f35a184a70785063d0c0e1473645cb020a3"
+    },
+    {
+      "bytes": 1488,
+      "id": "E23",
+      "path": "outputs/QQQ_G7_EASING_CHALLENGER_RESULTS.json",
+      "root": "P",
+      "sha256": "1035ccfd1b5584af52444febe9df8358ba6874970e6318fc76ae50afa094b349"
+    },
+    {
+      "bytes": 7890,
+      "id": "E24",
+      "path": "outputs/QQQ_UPSTREAM_FINAL_VERDICT.md",
+      "root": "P",
+      "sha256": "3d64eeb3c1ff08fc4489ff25946c673561ae169e7f0e6f52fde0b49a9d346083"
+    },
+    {
+      "bytes": 1758,
+      "id": "E25",
+      "path": "outputs/QQQ_CARRY_COMPLEX_INDEPENDENT_AUDIT.md",
+      "root": "P",
+      "sha256": "a0449f748c37209a300eb56ae275bee240383848063cbe753eaf3dbc13594b2e"
+    },
+    {
+      "bytes": 6965,
+      "id": "E26",
+      "path": "outputs/QQQ_CROWDING_DIAGNOSTIC_FINAL_AUDIT.md",
+      "root": "P",
+      "sha256": "e9802553b4ad0b7a5268a50a2f4f77f4055e113e3df4077805caae5bd28e666a"
+    },
+    {
+      "bytes": 7560,
+      "id": "E27",
+      "path": "outputs/QQQ_CROWDING_INTERACTION_INDEPENDENT_AUDIT.md",
+      "root": "P",
+      "sha256": "85e609ba69727a4fd798e81d64074ced71a849186018a1637e4a4618c8e72887"
+    },
+    {
+      "bytes": 6738,
+      "id": "E28",
+      "path": "work/new-factor-audit/NETWORK_GAP_AUDIT.md",
+      "root": "P",
+      "sha256": "bc5411284c845652598d4e79b4a9bf5a254056aeeccb6261a7605cadf8d724a0"
+    },
+    {
+      "bytes": 6263,
+      "id": "E29",
+      "path": "work/new-factor-audit/NETWORK_BATCH2_INDEPENDENT_AUDIT.md",
+      "root": "P",
+      "sha256": "036601f2a121734f4cb571e1d6b593f13db655571d2a59ab6f428ae4ccea32a4"
+    },
+    {
+      "bytes": 3715,
+      "id": "E30",
+      "path": "work/network-reaudit-batch2/broad-ensemble/PREREGISTRATION.md",
+      "root": "P",
+      "sha256": "feeab5db5be07dd7b66de64db4daf6bea3fe9bfc22565703afabb05664de57ea"
+    },
+    {
+      "bytes": 27907,
+      "id": "E31",
+      "path": "work/network-reaudit-batch2/broad-ensemble/results/results.json",
+      "root": "P",
+      "sha256": "c39acda6b50ed23a457be93707b634160b29b5943a1e73306f9b8748c0ba2917"
+    },
+    {
+      "bytes": 4454,
+      "id": "E32",
+      "path": "work/new-factor-audit/BROAD_ENSEMBLE_INDEPENDENT_AUDIT.md",
+      "root": "P",
+      "sha256": "5d211fb3140d7d8174249663e6b26ce8e59a7ad50fca531bf5b92c6774a56898"
+    },
+    {
+      "bytes": 4383,
+      "id": "E33",
+      "path": "work/monthly-staggered-sensitivity/PREREGISTRATION.md",
+      "root": "P",
+      "sha256": "17f911803112e487779805c0726992565d954e0d0039796004eb3eed5f66774e"
+    },
+    {
+      "bytes": 3278,
+      "id": "E34",
+      "path": "work/monthly-staggered-sensitivity/SOURCE_MAP.md",
+      "root": "P",
+      "sha256": "7bc941c37ac009030343ce364c606e4b8cf86beceee646131d195c5afa8567e7"
+    },
+    {
+      "bytes": 4514,
+      "id": "E35",
+      "path": "work/monthly-staggered-sensitivity/artifacts/final/sources.json",
+      "root": "P",
+      "sha256": "2cd48b3242f401b1ea180c52a7c6173989ca8a36b6d7dd7db21e9d226f593222"
+    },
+    {
+      "bytes": 391397,
+      "id": "E37",
+      "path": "work/monthly-staggered-sensitivity/artifacts/final/predictions.csv",
+      "root": "P",
+      "sha256": "2cc021a04dc0ce20dcb44ec7624e4ab9bf520f341ccde902b8140cfc5e76d5fd"
+    },
+    {
+      "bytes": 25721,
+      "id": "E38",
+      "path": "work/monthly-staggered-sensitivity/artifacts/final/results.json",
+      "root": "P",
+      "sha256": "a63f72ac254042b33cbf518c942bdbf1083ee6926fb3995f96e0ba905111c6e6"
+    },
+    {
+      "bytes": 2936,
+      "id": "E39",
+      "path": "work/new-factor-audit/MONTHLY_STAGGERED_INDEPENDENT_AUDIT.md",
+      "root": "P",
+      "sha256": "95b8d056ec292199b33bdd411cc86269874e770ee0e8e9df8d42492e92033cc1"
+    },
+    {
+      "bytes": 9576,
+      "id": "E46",
+      "original_sha256": "698b0fd884da829bebfd68ce6f0d74c8c193f366ffae6cab9a3bb3ebab0e27e2",
+      "path": "outputs/QQQ_FACTOR_STATUS_MATRIX.md",
+      "redacted": true,
+      "redaction_reason": "Local paths or prospective tracking details removed from GitHub derivative.",
+      "root": "P",
+      "sha256": "14a8f4c08118df83436dbe5688cc902c107ae2ebfb2a67106a4730b37d82e3ab"
+    }
+  ],
+  "hash_algorithm": "sha256",
+  "omissions": [
+    {
+      "bytes": 183718,
+      "id": "E36",
+      "path": "work/monthly-staggered-sensitivity/artifacts/final/monthly_features.csv",
+      "reason": "Bytes omitted because upstream redistribution rights are unresolved.",
+      "sha256": "a07d8dec07b988417410fe3b2426a09aa69e4c07be05e88d83894dfe5029c189"
+    },
+    {
+      "bytes": 1045,
+      "id": "E41",
+      "path": "outputs/QQQ_EPS_LIVE_OOS_HEARTBEAT.csv",
+      "reason": "Bytes omitted because this file contains an active prospective forecast, target dates, or its live provenance packet.",
+      "sha256": "9351ea15b2d865d359dd0940df0a057732803764462fb5e4fe8a8fd39486e9b5"
+    },
+    {
+      "bytes": 1018,
+      "id": "E42",
+      "path": "outputs/QQQ_PROSPECTIVE_DIRECTION_TEST.csv",
+      "reason": "Bytes omitted because this file contains an active prospective forecast, target dates, or its live provenance packet.",
+      "sha256": "28760b2c7f6e18ae22ada384928bab40edfffd5a6504d56aeee2ad2d93c98a5b"
+    },
+    {
+      "bytes": 1103,
+      "id": "E43",
+      "path": "outputs/QQQ_FORWARD_OWN_PROSPECTIVE_TEST.csv",
+      "reason": "Bytes omitted because this file contains an active prospective forecast, target dates, or its live provenance packet.",
+      "sha256": "209a5d4ae12d742691696c1344b95d940ffed464c43253655a6a9bd2ae83c2c2"
+    },
+    {
+      "bytes": 311,
+      "id": "E45",
+      "path": "outputs/QQQ_LIVE_OOS_LEDGER.csv",
+      "reason": "Bytes omitted because this file contains an active prospective forecast, target dates, or its live provenance packet.",
+      "sha256": "e789ba8d840bf929b361c5b7bf173934efb212ce841acd2605adacf9bea00354"
+    },
+    {
+      "bytes": 1862,
+      "id": "E47",
+      "path": "work/evidence/prospective-qqq-nowcast/2026-08-28T100037Z/qa-report.md",
+      "reason": "Bytes omitted because this file contains an active prospective forecast, target dates, or its live provenance packet.",
+      "sha256": "1ae6566734631a93ed523392b47c1a3f00da5379900a47f7dfd4dbf19bd7bcad"
+    },
+    {
+      "bytes": 887,
+      "id": "E48",
+      "path": "work/evidence/prospective-qqq-nowcast/2026-08-28T100037Z/late-capture/sources.json",
+      "reason": "Bytes omitted because this file contains an active prospective forecast, target dates, or its live provenance packet.",
+      "sha256": "9ca638f2f6ad09131dd9b408cbf79b7d4fbdfd41c23d6dce7374c5d36dfe4da9"
+    },
+    {
+      "bytes": 2657,
+      "id": "E49",
+      "path": "work/evidence/forward-own-live-sidecar/2026-08-28T161103Z/transformation.json",
+      "reason": "Bytes omitted because this file contains an active prospective forecast, target dates, or its live provenance packet.",
+      "sha256": "10f30879cd0629ee932ceac9eed66e0b28e0e22254fb6bbacd03df7bac8f8586"
+    },
+    {
+      "bytes": 2752,
+      "id": "E40",
+      "path": "outputs/QQQ_EPS_LIVE_OOS_PROTOCOL.md",
+      "reason": "Bytes omitted because this file is part of an active prospective forecast protocol; GitHub receives no protocol or forecast bytes.",
+      "sha256": "58f5df1fa47088358271bfa2b1856c82ff30485b74137c87d43b70343e1ab1e9"
+    },
+    {
+      "bytes": 1309,
+      "id": "E44",
+      "path": "outputs/QQQ_LIVE_OOS_PROTOCOL.md",
+      "reason": "Bytes omitted because this file is part of an active prospective forecast protocol; GitHub receives no protocol or forecast bytes.",
+      "sha256": "33158201b62fd3a310387d99bf871d64e1d0e582cc3c81feb7141a7acb12c313"
+    }
+  ],
+  "packaged_at": "2026-08-29 (GitHub redacted derivative)",
+  "roots": {
+    "P": "evidence/P",
+    "S": "evidence/S"
+  },
+  "schema_version": "qqq-audit-paper-evidence/v1",
+  "scope_note": "GitHub-safe claim-level packet. Three distributed text files are redacted derivatives; restricted source-derived rows and active prospective forecast bytes are omitted. Original hashes and reasons are retained. Byte integrity does not imply full computational reproduction or historical PIT validity.",
+  "source_manifest_aggregate_sha256": "e3b758dbb560ae0e1b83ffa5834f12bec6a3a168d5172a0fbfd6134c8c4e5b83"
+}

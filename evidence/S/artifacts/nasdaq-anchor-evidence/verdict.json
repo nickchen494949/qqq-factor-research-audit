@@ -1,0 +1,59 @@
+{
+  "audit": "official_nasdaq_same_series_anchor_discovery",
+  "audit_date": "2026-08-26",
+  "decision": "BLOCK_INSUFFICIENT_ELIGIBLE_ANCHORS",
+  "contract_sha256": "cc3efcdc3110f02dc41e4e84156ebfb2207e6aaeca202bb04abd31810c3c02be",
+  "target_contract_sha256": "682a99de148af359b274c89798b2a8ac8e1faba7d88c278977c0a94d22a6024d",
+  "anchor_gate": {
+    "existing_confirmed": 6,
+    "new_eligible_found": 0,
+    "confirmed_after_search": 6,
+    "required_minimum": 8,
+    "shortfall": 2,
+    "passes": false
+  },
+  "bounded_search": {
+    "cdx_records_frozen": 6435,
+    "candidate_url_rows_2023_2026": 99,
+    "nasdaq_100_related_url_rows": 28,
+    "nasdaq_100_quarterly_commentary_url_rows": 10,
+    "quarterly_commentary_capture_records": 11,
+    "distinct_quarterly_commentary_pdf_hashes": 9,
+    "raw_pdf_files_retained": 15,
+    "distinct_raw_pdf_hashes": 13
+  },
+  "eligible_new": [],
+  "key_exclusions": [
+    {
+      "period": "2025-Q3",
+      "value": "+35% YoY",
+      "reason": "generic earnings growth; not explicitly index-weighted EPS"
+    },
+    {
+      "period": "2025-Q2",
+      "value": "+27%",
+      "reason": "partial reporters; non-GAAP earnings update; not index-weighted EPS"
+    },
+    {
+      "period": "2025-Q3",
+      "value": "+16% YoY",
+      "reason": "preliminary net income; partial reporters; not index-weighted EPS"
+    },
+    {
+      "period": "2025-Q4",
+      "value": "+18% YoY",
+      "reason": "net income, not index-weighted EPS"
+    },
+    {
+      "period": "2026-Q1",
+      "value": "+45.5% / +51%",
+      "reason": "monthly scorecards; partial or near-complete reporters; not explicit quarterly-commentary index-weighted EPS"
+    },
+    {
+      "period": "2023-Q2",
+      "value": "+17.3%",
+      "reason": "later retrospective definition/vintage conflicts with contemporaneous -9% anchor"
+    }
+  ],
+  "required_action": "Keep proxy validation blocked until two additional exact-contract anchors are frozen or the contract is prospectively revised with authoritative Nasdaq reconciliation evidence."
+}
