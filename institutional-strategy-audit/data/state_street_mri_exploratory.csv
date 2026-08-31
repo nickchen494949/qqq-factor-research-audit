@@ -1,0 +1,7 @@
+date,stance_interpretation,signal_code,spy_3m_return_pct,spy_6m_return_pct,caveat
+2024-06-18,Low-risk / equity overweight,1,2.4,6.9,Global TAA context
+2025-03-19,Risk worsened but modest equity overweight,1,5.4,16.8,Interpretation depends on contemporaneous TAA text
+2025-04-11,High-risk / equity underweight,-1,16.8,22.3,Risk-off after sharp selloff; not necessarily predictive
+2025-07-22,Risk-on improving; global equity mixed; US favored,0,6.2,9.6,Ambiguous coding; do not use in formal binary correlation
+2025-09-22,Strong risk-on / meaningful equity overweight,1,2.7,-1.7,Small sample
+2026-01-20,Constructive / substantial equity overweight,1,4.6,9.5,Small sample
