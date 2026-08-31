@@ -1,0 +1,146 @@
+Run timestamp: 2026-08-31T18:46:55.514663
+Python: 3.11.6 (v3.11.6:8b6ee5ba3b, Oct  2 2023, 11:18:21) [Clang 13.0.0 (clang-1300.0.29.30)]
+
+============================================================
+  STEP 1: Download raw price data
+============================================================
+  QQQ daily prices: 6911 rows, 1999-03-10 00:00:00 → 2026-08-28 00:00:00
+  SHY daily prices: 6060 rows, 2002-07-30 00:00:00 → 2026-08-28 00:00:00
+
+============================================================
+  STEP 2: Compute monthly end-of-month prices
+============================================================
+  Monthly prices (aligned): 290 months
+  Period: 2002-07 → 2026-08
+
+============================================================
+  STEP 3: Compute momentum signals
+============================================================
+  Method: skip most recent 1 month (avoid short-term reversal)
+  mom_3m  = price return from t-4 to t-1
+  mom_6m  = price return from t-7 to t-1
+  mom_12m = price return from t-13 to t-1
+  composite = (mom_3m + mom_6m + mom_12m) / 3
+  signal = 1 if composite > 0, else 0
+  Signals computed: 330 months with signal
+  Signal ON  (long QQQ): 242 months
+  Signal OFF (hold SHY): 88 months
+
+============================================================
+  STEP 4: Backtest
+============================================================
+  Backtest period: 2002-08 → 2026-08
+  Total months: 289
+
+============================================================
+  STEP 5: Performance Summary
+============================================================
+
+  ┌─────────────────────────────────────────────┐
+  │  Momentum 3M+6M+12M                          │
+  ├─────────────────────────────────────────────┤
+  │  Period:         2002-08 → 2026-08                  │
+  │  Total months:   289                         │
+  │  Months in QQQ:  232 (80%)             │
+  │  Months in SHY:  57 (20%)              │
+  │  CAGR:             +13.97%                   │
+  │  Annual Vol:        14.61%                   │
+  │  Sharpe Ratio:      0.972                    │
+  │  Max Drawdown:      -22.6%  (2008-05)     │
+  │  Hit Rate:           62.3%                   │
+  │  Total Return:     2233.5%                   │
+  └─────────────────────────────────────────────┘
+
+  ┌─────────────────────────────────────────────┐
+  │  Buy & Hold QQQ                              │
+  ├─────────────────────────────────────────────┤
+  │  Period:         2002-08 → 2026-08                  │
+  │  Total months:   289                         │
+  │  CAGR:             +16.03%                   │
+  │  Annual Vol:        18.85%                   │
+  │  Sharpe Ratio:      0.887                    │
+  │  Max Drawdown:      -49.7%  (2009-02)     │
+  │  Hit Rate:           61.9%                   │
+  │  Total Return:     3488.2%                   │
+  └─────────────────────────────────────────────┘
+
+============================================================
+  STEP 6: Signal Effectiveness
+============================================================
+  When LONG QQQ (signal=1):
+    Months:             232
+    Avg monthly ret:    +1.43%
+    Annualized:         +17.18%
+    Monthly vol:        4.67%
+
+  When OUT / SHY (signal=0):
+    Months:             57
+    Avg monthly QQQ:   +1.24%
+    Annualized QQQ:    +14.89%
+    Monthly vol QQQ:   7.90%
+
+  Signal discriminates: +17.18% vs +14.89% annualized
+  Spread:               +2.29% per year
+
+============================================================
+  STEP 7: Year-by-Year Comparison
+============================================================
+  Year     Momentum   Buy&Hold     Excess  Signal%
+  ────     ────────   ────────     ──────  ───────
+  2002        +2.1%      +2.2%      -0.1%       0%
+  2003       +23.7%     +49.7%     -26.0%      58%
+  2004        -1.0%     +10.5%     -11.5%      83%
+  2005        -0.7%      +1.6%      -2.3%      75%
+  2006        -0.3%      +7.1%      -7.4%      67%
+  2007       +19.0%     +19.0%      +0.0%     100%
+  2008       -12.8%     -41.7%     +29.0%      25%
+  2009       +25.7%     +54.7%     -29.0%      50%
+  2010       +20.1%     +20.1%      +0.0%     100%
+  2011        +6.4%      +3.5%      +2.9%      92%
+  2012       +18.1%     +18.1%      +0.0%     100%
+  2013       +36.6%     +36.6%      +0.0%     100%
+  2014       +19.2%     +19.2%      +0.0%     100%
+  2015        -2.7%      +9.4%     -12.2%      83%
+  2016        +5.4%      +7.1%      -1.7%      67%
+  2017       +32.7%     +32.7%      +0.0%     100%
+  2018        -0.1%      -0.1%      +0.0%     100%
+  2019       +30.8%     +39.0%      -8.2%      83%
+  2020       +39.1%     +48.4%      -9.3%      92%
+  2021       +27.4%     +27.4%      +0.0%     100%
+  2022       -12.0%     -32.6%     +20.6%      33%
+  2023       +30.0%     +54.9%     -24.8%      67%
+  2024       +25.6%     +25.6%      +0.0%     100%
+  2025       +10.3%     +20.8%     -10.4%      92%
+  2026       +17.7%     +17.7%      +0.0%     100%
+
+  Years momentum beats B&H:   3 / 25
+  Years momentum trails B&H:  12 / 25
+  Avg excess when winning:    +17.5%
+  Avg excess when losing:     -11.9%
+
+============================================================
+  STEP 8: Crisis Period Analysis
+============================================================
+  Dot-com crash          Mom:    +1.4%  B&H:    +2.9%  Avoided:    -1.5%  Signal: 0% long
+  GFC                    Mom:   -18.8%  B&H:   -44.6%  Avoided:   +25.8%  Signal: 29% long
+  Q4 2018 selloff        Mom:   -16.7%  B&H:   -16.7%  Avoided:    +0.0%  Signal: 100% long
+  COVID crash            Mom:   -12.9%  B&H:   -12.9%  Avoided:    +0.0%  Signal: 100% long
+  2022 bear market       Mom:   -12.7%  B&H:   -29.8%  Avoided:   +17.1%  Signal: 40% long
+  2025 tariff shock      Mom:    -8.8%  B&H:    -8.8%  Avoided:    +0.0%  Signal: 100% long
+
+============================================================
+  BOTTOM LINE
+============================================================
+  CAGR:       Momentum +13.97%  vs  B&H +16.03%  →  -2.05%
+  Sharpe:     Momentum 0.972    vs  B&H 0.887    →  +0.085
+  Max DD:     Momentum -22.6%   vs  B&H -49.7%   →  +27.1% less pain
+  Exposure:   Only in QQQ 80% of months
+
+  ✅ Momentum improves risk-adjusted returns (higher Sharpe).
+  ✅ Momentum reduces worst drawdown by -27.1pp.
+  ⚠️  Momentum trails CAGR by 2.05pp (expected: fewer months exposed).
+
+  CAVEAT: This is in-sample. No walk-forward / OOS split applied.
+  CAVEAT: No transaction costs or slippage included.
+  CAVEAT: SHY used as cash proxy; SHY inception 2002-07, pre-2002 months excluded.
+
