@@ -1,0 +1,118 @@
+Run timestamp: 2026-08-31T18:58:18.567682
+
+Downloading QQQ and TQQQ...
+  TQQQ daily: 4162 rows, 2010-02-11 00:00:00 → 2026-08-28 00:00:00
+  Backtest period: 2010-03 → 2026-08
+  Total months: 198
+
+==============================================================================
+  STRATEGY RULES
+==============================================================================
+
+  Signal source:    QQQ (unleveraged) — NOT TQQQ
+  Trade vehicle:    TQQQ (3x leveraged Nasdaq-100)
+  Cash vehicle:     CASH (0% return)
+
+  ENTRY:
+    At end of month, compute:
+      mom_3m  = QQQ return from t-4 to t-1
+      mom_6m  = QQQ return from t-7 to t-1
+      mom_12m = QQQ return from t-13 to t-1
+      composite = (mom_3m + mom_6m + mom_12m) / 3
+    If composite > 0 → BUY TQQQ at next month open
+
+  EXIT (Original):
+    If composite ≤ 0 → SELL TQQQ, hold CASH. No questions asked.
+
+  EXIT (Never Sell Loss):
+    If composite ≤ 0 AND current TQQQ price ≥ entry price → SELL (take profit)
+    If composite ≤ 0 AND current TQQQ price < entry price → HOLD (wait for recovery)
+    Once price recovers above entry → SELL at next month end
+
+  Rebalance:        Monthly, end of month
+  Signal lag:        1 month (decide at t, execute at t+1)
+
+==============================================================================
+  HEAD-TO-HEAD COMPARISON
+==============================================================================
+
+  Metric                       Mom→TQQQ    NeverSellLoss       B&H TQQQ        B&H QQQ
+  ────────────────────── ────────────── ──────────────── ────────────── ──────────────
+  CAGR                          +40.02%          +42.23%        +42.16%        +19.38%
+  Annual Vol                     49.16%           53.00%         55.22%         17.62%
+  Sharpe                          0.932            0.933          0.917          1.099
+  Max Drawdown                   -49.5%           -71.1%         -79.1%         -32.6%
+  Max DD Date                   2016-02          2022-06        2022-12        2022-12
+  Total Return                 25719.7%         33327.9%       33063.2%        1758.2%
+  TQQQ Exposure                     88%              94%           100%          (QQQ)
+
+  $10,000 invested at start:
+    Momentum → TQQQ:      $   2,581,968
+    Never Sell Loss:       $   3,342,788
+    Buy & Hold TQQQ:      $   3,316,315
+    Buy & Hold QQQ:       $     185,818
+
+==============================================================================
+  FORCED HOLD EPISODES (Never-Sell-Loss variant)
+==============================================================================
+  Ep 1: 2016-03 → 2016-07  (5mo)  entry: $2.26  worst: $1.83 (-19%)  cum: +39.4%  [recovered → TP exit]
+  Ep 2: 2022-06 → 2022-07  (2mo)  entry: $15.75  worst: $11.44 (-27%)  cum: +0.9%  [recovered → TP exit]
+
+  Total forced hold months: 5 / 198
+
+==============================================================================
+  YEAR-BY-YEAR
+==============================================================================
+  Year       Mom→TQQQ  NvrSellLoss     B&H TQQQ    B&H QQQ  Signal%
+  ────     ──────────   ──────────   ──────────   ────────  ───────
+  2010         +65.6%       +65.6%       +65.6%     +22.8%     100%
+  2011          +2.3%        -8.0%        -8.0%      +3.5%      92%
+  2012         +52.3%       +52.3%       +52.3%     +18.1%     100%
+  2013        +139.7%      +139.7%      +139.7%     +36.6%     100%
+  2014         +57.1%       +57.1%       +57.1%     +19.2%     100%
+  2015         -15.7%       +15.7%       +17.2%      +9.4%      83%
+  2016          +7.2%        +8.1%       +11.4%      +7.1%      67%
+  2017        +118.1%      +118.1%      +118.1%     +32.7%     100%
+  2018         -19.8%       -19.8%       -19.8%      -0.1%     100%
+  2019         +93.9%      +110.6%      +133.8%     +39.0%      83%
+  2020         +77.1%      +110.1%      +110.1%     +48.4%      92%
+  2021         +83.0%       +83.0%       +83.0%     +27.4%     100%
+  2022         -36.7%       -59.9%       -79.1%     -32.6%      33%
+  2023         +81.5%       +81.5%      +198.0%     +54.9%      67%
+  2024         +58.3%       +58.3%       +58.3%     +25.6%     100%
+  2025          +5.3%       +34.4%       +34.4%     +20.8%      92%
+  2026         +39.6%       +39.6%       +39.6%     +17.7%     100%
+
+==============================================================================
+  CRISIS PERIODS — THIS IS WHERE IT MATTERS FOR TQQQ
+==============================================================================
+  Q4 2018          Mom→TQQQ:   -47.9%  NeverSell:   -47.9%  B&H TQQQ:   -47.9%  B&H QQQ:   -16.7%
+  COVID crash      Mom→TQQQ:   -49.1%  NeverSell:   -49.1%  B&H TQQQ:   -49.1%  B&H QQQ:   -12.9%
+  2022 bear        Mom→TQQQ:   -36.7%  NeverSell:   -59.9%  B&H TQQQ:   -74.8%  B&H QQQ:   -29.8%
+  2025 tariff      Mom→TQQQ:   -33.5%  NeverSell:   -33.5%  B&H TQQQ:   -33.5%  B&H QQQ:    -8.8%
+
+==============================================================================
+  THE KEY QUESTION: IS MOMENTUM + TQQQ BETTER THAN JUST QQQ?
+==============================================================================
+
+  Momentum → TQQQ:  CAGR +40.02%  Sharpe 0.932  MaxDD -49.5%
+  Buy & Hold QQQ:   CAGR +19.38%  Sharpe 1.099  MaxDD -32.6%
+
+  ❌ Momentum + TQQQ does not clearly beat plain QQQ on risk-adjusted basis.
+
+==============================================================================
+  BOTTOM LINE
+==============================================================================
+
+  On TQQQ, momentum's value is primarily SURVIVAL.
+  Buy & hold TQQQ max drawdown: -79.1%
+  Momentum TQQQ max drawdown:   -49.5%
+  That's -30pp of drawdown avoided.
+
+  CAVEATS:
+  - In-sample only. No walk-forward / OOS validation.
+  - No transaction costs or slippage.
+  - TQQQ has daily rebalancing costs and tracking error not modeled.
+  - TQQQ may not exist in future severe drawdowns (ETF closure risk).
+  - Pre-2010 data not available (TQQQ inception 2010-02).
+

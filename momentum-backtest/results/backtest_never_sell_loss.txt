@@ -1,0 +1,97 @@
+Run timestamp: 2026-08-31T18:52:54.169850
+
+Downloading QQQ and SHY...
+
+======================================================================
+  HEAD-TO-HEAD COMPARISON
+======================================================================
+
+  Metric                   Original Mom  Never Sell Loss     Buy & Hold
+  ────────────────────── ────────────── ──────────────── ──────────────
+  CAGR                          +13.97%          +15.70%        +16.03%
+  Annual Vol                     14.61%           15.84%         18.85%
+  Sharpe                          0.972            1.005          0.887
+  Max Drawdown                   -22.6%           -29.3%         -49.7%
+  Max DD Date                   2008-05          2022-06        2009-02
+  Total Return                  2233.4%          3254.6%        3488.2%
+
+======================================================================
+  FORCED HOLD ANALYSIS (months where signal said EXIT but held at loss)
+======================================================================
+  Total months:                    289
+  Signal long (normal):            226 (78%)
+  Signal cash (normal):            36 (12%)
+  Forced hold (underwater):        14 (5%)
+  Take-profit exit:                13 (4%)
+
+  Forced hold months breakdown:
+    Avg QQQ return during forced hold: +0.75%
+    Months where QQQ went up:          7 / 14
+    Months where QQQ went down:        7 / 14
+    Worst month during forced hold:    -8.9%
+    Best month during forced hold:     +8.9%
+
+======================================================================
+  FORCED HOLD EPISODES (each time you got stuck)
+======================================================================
+  Episode 1: 2005-05 → 2005-11  (7 months)  entry: $33.97  cum QQQ: +18.0%  [recovered → TP exit]
+  Episode 2: 2006-07 → 2006-09  (3 months)  entry: $34.51  cum QQQ: +4.9%  [recovered → TP exit]
+  Episode 3: 2008-03 → 2008-04  (2 months)  entry: $37.68  cum QQQ: +10.0%  [recovered → TP exit]
+  Episode 4: 2016-03 → 2016-07  (5 months)  entry: $103.80  cum QQQ: +13.1%  [recovered → TP exit]
+  Episode 5: 2022-06 → 2022-07  (2 months)  entry: $300.27  cum QQQ: +2.5%  [recovered → TP exit]
+
+======================================================================
+  YEAR-BY-YEAR
+======================================================================
+  Year     Orig Mom  NeverSellLoss   Buy&Hold
+  ────     ────────  ─────────────   ────────
+  2002        +2.1%          +2.1%      +2.2%
+  2003       +23.7%         +23.7%     +49.7%
+  2004        -1.0%          +3.7%     +10.5%
+  2005        -0.7%          +1.6%      +1.6%
+  2006        -0.3%          +2.7%      +7.1%
+  2007       +19.0%         +19.0%     +19.0%
+  2008       -12.8%          -2.5%     -41.7%
+  2009       +25.7%         +25.7%     +54.7%
+  2010       +20.1%         +20.1%     +20.1%
+  2011        +6.4%          +3.5%      +3.5%
+  2012       +18.1%         +18.1%     +18.1%
+  2013       +36.6%         +36.6%     +36.6%
+  2014       +19.2%         +19.2%     +19.2%
+  2015        -2.7%          +8.5%      +9.4%
+  2016        +5.4%          +5.7%      +7.1%
+  2017       +32.7%         +32.7%     +32.7%
+  2018        -0.1%          -0.1%      -0.1%
+  2019       +30.8%         +34.6%     +39.0%
+  2020       +39.1%         +48.4%     +48.4%
+  2021       +27.4%         +27.4%     +27.4%
+  2022       -12.0%         -21.5%     -32.6%
+  2023       +30.0%         +30.0%     +54.9%
+  2024       +25.6%         +25.6%     +25.6%
+  2025       +10.3%         +20.8%     +20.8%
+  2026       +17.7%         +17.7%     +17.7%
+
+======================================================================
+  CRISIS PERIODS
+======================================================================
+  GFC              Orig:   -18.8%  NeverSellLoss:    -9.3%  B&H:   -44.6%
+  COVID            Orig:   -12.9%  NeverSellLoss:   -12.9%  B&H:   -12.9%
+  2022 Bear        Orig:   -12.7%  NeverSellLoss:   -22.1%  B&H:   -29.8%
+  2025 Tariff      Orig:    -8.8%  NeverSellLoss:    -8.8%  B&H:    -8.8%
+
+======================================================================
+  BOTTOM LINE
+======================================================================
+
+  Original Momentum:    Sharpe 0.972  CAGR +13.97%  MaxDD -22.6%
+  Never Sell at Loss:   Sharpe 1.005  CAGR +15.70%  MaxDD -29.3%
+  Buy & Hold:           Sharpe 0.887  CAGR +16.03%  MaxDD -49.7%
+
+  → Never-sell-at-loss IMPROVES Sharpe vs original momentum.
+  → Never-sell-at-loss has WORSE max drawdown (-29.3% vs -22.6%).
+
+  Forced hold months: 14 — these are months you were STUCK in a losing position
+  while the original strategy was safely in SHY.
+
+  CAVEAT: In-sample only. No transaction costs.
+

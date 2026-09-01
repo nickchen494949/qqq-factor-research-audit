@@ -1,0 +1,6 @@
+episode,start,end,months_stuck,entry_price,cumulative_qqq_return_pct,outcome
+1,2005-05,2005-11,7,33.97,18.0,recovered → TP exit
+2,2006-07,2006-09,3,34.51,4.91,recovered → TP exit
+3,2008-03,2008-04,2,37.68,10.0,recovered → TP exit
+4,2016-03,2016-07,5,103.8,13.05,recovered → TP exit
+5,2022-06,2022-07,2,300.27,2.53,recovered → TP exit
