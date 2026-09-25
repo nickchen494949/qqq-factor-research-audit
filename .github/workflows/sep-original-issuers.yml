@@ -1,0 +1,41 @@
+name: Original issuer archives
+on:
+  push:
+    branches: [tmp-sep-full-backtest-20260925]
+    paths: ['.github/workflows/sep-original-issuers.yml']
+permissions:
+  contents: read
+jobs:
+  get:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -q pandas requests
+      - run: |
+          python -u - <<'PY'
+          import requests,pandas as pd,json,hashlib
+          from pathlib import Path
+          from concurrent.futures import ThreadPoolExecutor
+          out=Path('originals');out.mkdir();tasks=[];manifest=[]
+          for s in ['AGN','JCI','LIFE','SUN','PGN','EP','CEG','ACT','ACE','TYC']:
+              tasks.append((s,'quantquote','https://raw.githubusercontent.com/philipxjm/Deep-Convolution-Stock-Technical-Analysis/fcb81b15c28cb22e4c49aa08fdfd67b8ef787194/data/daily/table_'+s.lower()+'.csv'))
+              tasks.append((s,'smccaula','https://raw.githubusercontent.com/smccaula/LSSP_Hackathon/959321c2c922b5a9c4c50c37e26c9f24c1529e54/data/1000/'+s+'.csv'))
+              tasks.append((s,'fairfinance','https://raw.githubusercontent.com/cryptogrammer/FairFinanceData/e0656265d57ca4f8a8a910de03bf9c74dc05e521/'+s+'.csv'))
+          def get(t):
+              s,source,url=t
+              try:
+                  r=requests.get(url,timeout=40);r.raise_for_status();path=out/(source+'_'+s+'.csv');path.write_bytes(r.content)
+                  meta={'symbol':s,'source':source,'url':url,'sha256':hashlib.sha256(r.content).hexdigest(),'bytes':len(r.content)}
+                  d=pd.read_csv(path,header=None if source=='quantquote' else 0);meta.update(rows=len(d),first=str(d.iloc[0].tolist()),last=str(d.iloc[-1].tolist()))
+                  manifest.append(meta);print(json.dumps(meta),flush=True)
+              except Exception as e:manifest.append({'symbol':s,'source':source,'error':str(e)})
+          with ThreadPoolExecutor(max_workers=8) as p:list(p.map(get,tasks))
+          (out/'manifest.json').write_text(json.dumps(manifest,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sep-original-issuers
+          path: originals/
+          retention-days: 7
