@@ -1,0 +1,64 @@
+name: SEP supplemental history
+on:
+  push:
+    branches: [tmp-sep-full-backtest-20260925]
+    paths: ['.github/workflows/sep-supplemental.yml']
+permissions:
+  contents: read
+jobs:
+  retrieve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -q pandas requests yfinance
+      - name: Additional independent archives
+        run: |
+          python -u - <<'PY'
+          import pandas as pd,requests,json,hashlib,traceback
+          from pathlib import Path
+          out=Path('supplement');out.mkdir();manifest={}
+          def fetch(url,name):
+              r=requests.get(url,timeout=180);r.raise_for_status();(out/name).write_bytes(r.content)
+              manifest[name]={'url':url,'bytes':len(r.content),'sha256':hashlib.sha256(r.content).hexdigest()}
+              print('FETCH',name,len(r.content),flush=True)
+              return out/name
+          try:
+              p=fetch('https://media.githubusercontent.com/media/kmfranz/trading_pairs/master/WIKI_PRICES.csv','wiki_source.csv')
+              parts=[]
+              for c in pd.read_csv(p,chunksize=400000):
+                  print('WIKI columns',c.columns.tolist(),flush=True) if not parts else None
+                  c['date']=pd.to_datetime(c['date']);c=c[c.date>='2010-01-01']
+                  if len(c):parts.append(c)
+              d=pd.concat(parts,ignore_index=True);d.to_csv(out/'wiki.csv.gz',index=False,compression='gzip');print('WIKI',d.shape,d.date.min(),d.date.max(),flush=True);p.unlink()
+          except Exception as e:manifest['wiki_error']=str(e);traceback.print_exc()
+          try:fetch('https://raw.githubusercontent.com/teddykoker/survivorship-free-spy/master/survivorship-free/data.zip','teddy_prices.zip')
+          except Exception as e:manifest['teddy_error']=str(e)
+          try:fetch('https://raw.githubusercontent.com/teddykoker/survivorship-free-spy/master/survivorship-free/constituents.csv','teddy_constituents.csv')
+          except Exception as e:manifest['constituents_error']=str(e)
+          import yfinance as yf
+          symbols=['BF-B','BRK-B','AVB','EQR','EA','Q','BK','BNY','ANSS','CTRA','DFS','FI','FISV','HES','HOLX','IPG','JNPR','K','MMC','MRSH','WBA','CDAY','DAY','RE','EG','PEAK','DOC','HCP','CA','DNB','PX','EMC','SE','STI','LB','BBWI','IR','TT','ARNC','HWM','DOW','DD','WYND','TNL','SNDK','MON','XL','ALTR','BEAM','S','FRC','FRCB','SIVB','SIVBQ','ANR','ANRZQ','FRC','SATS','AMCR']
+          parts=[];failed=[]
+          for i in range(0,len(symbols),20):
+              batch=symbols[i:i+20];raw=yf.download(batch,start='2010-01-01',end='2026-09-25',auto_adjust=False,actions=True,progress=False,group_by='ticker',threads=6,timeout=25)
+              for sym in batch:
+                  try:
+                      d=raw[sym].dropna(subset=['Close']).copy()
+                      if d.empty:failed.append(sym);continue
+                      d.index=pd.to_datetime(d.index).tz_localize(None);d=d.reset_index().rename(columns={'Date':'date'});d['symbol']=sym;parts.append(d)
+                      print('YAHOO',sym,len(d),str(d.date.min()),str(d.date.max()),flush=True)
+                  except Exception:failed.append(sym)
+          if parts:pd.concat(parts,ignore_index=True).to_csv(out/'supplemental_yahoo.csv.gz',index=False,compression='gzip')
+          manifest['yahoo_failed']=failed
+          (out/'manifest.json').write_text(json.dumps(manifest,indent=2))
+          print(json.dumps(manifest,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sep-supplemental
+          path: supplement/
+          retention-days: 7
+          compression-level: 0
