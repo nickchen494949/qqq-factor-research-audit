@@ -1,0 +1,69 @@
+name: SEP complete historical price sources
+on:
+  push:
+    branches: [tmp-sep-full-backtest-20260925]
+    paths: ['.github/workflows/sep-full-wiki-yahoo.yml']
+permissions:
+  contents: read
+jobs:
+  retrieve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -q pandas requests yfinance pyarrow
+      - name: Historical price sources
+        run: |
+          python -u - <<'PY'
+          import pandas as pd,requests,yfinance as yf,zipfile,io,json,hashlib,traceback
+          from pathlib import Path
+          from concurrent.futures import ThreadPoolExecutor
+          out=Path('sources');out.mkdir();manifest={}
+          def wiki():
+              url='https://www.kaggle.com/api/v1/datasets/download/marketneutral/quandl-wiki-prices-us-equites'
+              try:
+                  r=requests.get(url,timeout=240);r.raise_for_status()
+                  manifest['wiki_download']={'url':url,'bytes':len(r.content),'sha256':hashlib.sha256(r.content).hexdigest(),'content_type':r.headers.get('Content-Type')}
+                  z=zipfile.ZipFile(io.BytesIO(r.content));print('KAGGLE_FILES',z.namelist(),flush=True)
+                  for name in z.namelist():
+                      if name.endswith('.parquet'):
+                          d=pd.read_parquet(io.BytesIO(z.read(name)));print('WIKI_SCHEMA',d.shape,d.columns.tolist(),d.index.names,flush=True)
+                          if 'date' not in d.columns:d=d.reset_index()
+                          d['date']=pd.to_datetime(d['date']);d=d[d.date>='2010-01-01']
+                          d.to_csv(out/'wiki_complete.csv.gz',index=False,compression='gzip');print('WIKI_COMPLETE',d.shape,d.date.min(),d.date.max(),flush=True)
+                      elif name.lower().endswith('.csv'):
+                          chunks=[]
+                          for c in pd.read_csv(z.open(name),chunksize=500000):
+                              c['date']=pd.to_datetime(c['date']);c=c[c.date>='2010-01-01']
+                              if len(c):chunks.append(c)
+                          d=pd.concat(chunks,ignore_index=True);d.to_csv(out/'wiki_complete.csv.gz',index=False,compression='gzip');print('WIKI_COMPLETE',d.shape,d.date.min(),d.date.max(),flush=True)
+              except Exception as e:manifest['wiki_error']=str(e);traceback.print_exc()
+          with ThreadPoolExecutor(max_workers=1) as pool:
+              task=pool.submit(wiki)
+              r=requests.get('https://raw.githubusercontent.com/fja05680/sp500/master/sp500_ticker_start_end.csv',timeout=60);r.raise_for_status();mem=pd.read_csv(io.StringIO(r.text))
+              ends=pd.to_datetime(mem.end_date,errors='coerce');symbols=sorted(set(mem.loc[ends.isna() | (ends>='2018-01-01'),'ticker'].str.replace('.','-',regex=False)) | {'BK','BNY','MRSH','MMC','FI','FISV','DOC','TT','TNL','BBWI','META','EG','PARA','PSKY','FRCB','TQQQ','QQQ','SPY','BIL'})
+              rows=[];failed=[]
+              for i in range(0,len(symbols),40):
+                  batch=symbols[i:i+40]
+                  raw=yf.download(batch,start='2010-01-01',end='2026-09-25',auto_adjust=False,actions=True,progress=False,group_by='ticker',threads=8,timeout=25)
+                  for sym in batch:
+                      try:
+                          d=raw[sym].copy() if isinstance(raw.columns,pd.MultiIndex) else raw.copy();d=d.dropna(subset=['Close'])
+                          if d.empty:failed.append(sym);continue
+                          d.index=pd.to_datetime(d.index).tz_localize(None);d=d.reset_index().rename(columns={'Date':'date'});d['symbol']=sym;rows.append(d)
+                      except Exception:failed.append(sym)
+                  print('YF_FULL',i,len(symbols),'rows',sum(len(x) for x in rows),flush=True)
+              pd.concat(rows,ignore_index=True).to_csv(out/'yahoo_continuous.csv.gz',index=False,compression='gzip')
+              manifest['yahoo_failed']=failed
+              task.result()
+          (out/'manifest.json').write_text(json.dumps(manifest,indent=2));print(json.dumps(manifest,indent=2),flush=True)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sep-continuous-sources
+          path: sources/
+          retention-days: 7
+          compression-level: 0
