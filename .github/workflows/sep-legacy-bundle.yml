@@ -1,0 +1,53 @@
+name: SEP legacy security archive
+on:
+  push:
+    branches: [tmp-sep-full-backtest-20260925]
+    paths: ['.github/workflows/sep-legacy-bundle.yml']
+permissions:
+  contents: read
+jobs:
+  retrieve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -q numpy pandas requests bcolz-zipline
+      - name: Recover original archive
+        run: |
+          python -u - <<'PY'
+          from pathlib import Path
+          import requests,tarfile,sqlite3,json,hashlib,traceback,shutil
+          import pandas as pd,numpy as np,bcolz
+          out=Path('legacy');out.mkdir();meta={}
+          url='https://s3.amazonaws.com/quantopian-public-zipline-data/quandl'
+          try:
+              r=requests.get(url,timeout=180);r.raise_for_status();p=Path('bundle.tar');p.write_bytes(r.content)
+              meta['source']={'url':url,'sha256':hashlib.sha256(r.content).hexdigest(),'bytes':len(r.content)}
+              with tarfile.open(p) as t:
+                  print('ARCHIVE',t.getnames()[:50]);t.extractall('raw',filter='data')
+              roots=list(Path('raw').rglob('daily_equities.bcolz'))
+              if not roots:roots=list(Path('raw').rglob('*.bcolz'))
+              root=roots[0];table=bcolz.open(str(root));print('BCOLZ',root,table.names,'rows',len(table))
+              meta['bcolz_attrs']={k:table.attrs[k] for k in table.attrs}
+              print('ATTRS',str(meta['bcolz_attrs'])[:1200]);print('SAMPLE',table[:5])
+              data=pd.DataFrame.from_records(table[:]);print(data.head().to_string())
+              data['date']=pd.to_datetime(data['day'],unit='s');data=data[data.date>='2010-01-01']
+              data.to_csv(out/'daily_raw.csv.gz',index=False,compression='gzip')
+              for s in Path('raw').rglob('*.sqlite'):
+                  shutil.copy(s,out/s.name)
+                  con=sqlite3.connect(s);tabs=pd.read_sql("SELECT name FROM sqlite_master WHERE type='table'",con)['name'].tolist();print('SQL',s,tabs)
+                  for tab in tabs:
+                      df=pd.read_sql('SELECT * FROM "'+tab+'"',con);df.to_csv(out/(s.stem+'__'+tab+'.csv.gz'),index=False,compression='gzip')
+                  con.close()
+          except Exception as e:meta['error']=str(e);traceback.print_exc()
+          (out/'manifest.json').write_text(json.dumps(meta,indent=2,default=str));print(json.dumps(meta,default=str)[:2500])
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sep-legacy-bundle
+          path: legacy/
+          retention-days: 7
+          compression-level: 0
