@@ -1,0 +1,43 @@
+name: SEP input conversion
+on:
+  push:
+    branches: [tmp-sep-full-backtest-20260925]
+    paths: ['.github/workflows/sep-input-conversion.yml']
+permissions:
+  contents: read
+  actions: read
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/download-artifact@v4
+        with:
+          name: sep-historical-inputs
+          run-id: 36107847027
+          github-token: ${{ github.token }}
+          path: inputs
+      - run: pip install -q pandas pyarrow
+      - name: Convert frozen tables
+        run: |
+          mkdir -p portable
+          python -u - <<'PY'
+          import pandas as pd,json
+          from pathlib import Path
+          info={}
+          for name in ['historical','modern']:
+              d=pd.read_parquet('inputs/'+name+'.parquet')
+              d.to_csv('portable/'+name+'.csv.gz',index=False,compression='gzip')
+              info[name]={'rows':len(d),'columns':d.columns.tolist(),'first_date':str(d.date.min()),'last_date':str(d.date.max()),'symbols':d.symbol.nunique()}
+              print(name,info[name]);print(d.head().to_string(index=False))
+          Path('portable/summary.json').write_text(json.dumps(info,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sep-portable-prices
+          path: portable/
+          retention-days: 7
+          compression-level: 0
