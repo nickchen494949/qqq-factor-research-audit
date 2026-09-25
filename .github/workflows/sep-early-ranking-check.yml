@@ -1,0 +1,36 @@
+name: Early issuer ranking check
+on:
+  push:
+    branches: [tmp-sep-full-backtest-20260925]
+    paths: ['.github/workflows/sep-early-ranking-check.yml']
+permissions:
+  contents: read
+jobs:
+  get:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -q requests
+      - run: |
+          python -u - <<'PY'
+          import requests,json,hashlib
+          from pathlib import Path
+          from concurrent.futures import ThreadPoolExecutor
+          out=Path('early');out.mkdir();manifest=[]
+          files=['data_sp500/'+s+'.csv' for s in ['MMI','CEG','PGN','SUN','LIFE','JCI','AGN','CCEP','CCE','FRX','ACT']]+['docs/data_sp500.md','docs/limitations.md','scripts/augment_sp500.py']
+          def get(path):
+              url='https://raw.githubusercontent.com/MateoBodon/microalpha/35b5353144adf2a53e03206be183e95b1491cc78/'+path
+              try:
+                  r=requests.get(url,timeout=30);r.raise_for_status();(out/Path(path).name).write_bytes(r.content)
+                  manifest.append({'file':path,'url':url,'sha256':hashlib.sha256(r.content).hexdigest(),'bytes':len(r.content)})
+              except Exception as e:manifest.append({'file':path,'error':str(e)})
+          with ThreadPoolExecutor(max_workers=6) as p:list(p.map(get,files))
+          (out/'manifest.json').write_text(json.dumps(manifest,indent=2));print(json.dumps(manifest,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sep-early-ranking-tapes
+          path: early/
+          retention-days: 7
