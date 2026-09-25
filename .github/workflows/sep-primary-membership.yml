@@ -1,0 +1,46 @@
+name: SEP primary holdings verification
+on:
+  push:
+    branches: [tmp-sep-full-backtest-20260925]
+    paths: ['.github/workflows/sep-primary-membership.yml']
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -q pandas requests yfinance
+      - name: Fetch dated source holdings
+        run: |
+          python -u - <<'PY'
+          import requests,pandas as pd,json,hashlib
+          from pathlib import Path
+          from concurrent.futures import ThreadPoolExecutor
+          out=Path('holdings');out.mkdir();manifest={}
+          import yfinance as yf
+          spy=yf.download('SPY',start='2011-12-01',end='2026-09-01',progress=False)
+          dates=pd.Series(spy.index,index=spy.index).groupby(spy.index.to_period('M')).max().tolist()
+          def get(d):
+              ds=d.strftime('%Y%m%d');url='https://www.ishares.com/us/products/239726/ishares-core-sp-500-etf/1467271812596.ajax?fileType=csv&fileName=IVV_holdings&dataType=fund&asOfDate='+ds
+              try:
+                  r=requests.get(url,timeout=30);r.raise_for_status()
+                  text=r.text
+                  if 'Ticker' in text or 'Issuer Ticker' in text:
+                      (out/(ds+'.csv')).write_bytes(r.content);manifest[ds]={'url':url,'bytes':len(r.content),'sha256':hashlib.sha256(r.content).hexdigest()}
+                      print(ds,'OK',len(r.content),text[:180].replace('\n',' '),flush=True)
+                  else:manifest[ds]={'error':'no ticker table','bytes':len(r.content)}
+              except Exception as e:manifest[ds]={'error':str(e)}
+          with ThreadPoolExecutor(max_workers=6) as p:list(p.map(get,dates))
+          (out/'manifest.json').write_text(json.dumps(manifest,indent=2));print('SUCCESS',sum('url' in x for x in manifest.values()),'TOTAL',len(manifest),flush=True)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sep-primary-holdings
+          path: holdings/
+          retention-days: 7
+          compression-level: 5
