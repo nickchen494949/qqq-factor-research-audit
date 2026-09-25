@@ -1,0 +1,110 @@
+name: SEP historical data retrieval
+on:
+  push:
+    branches: [tmp-sep-full-backtest-20260925]
+    paths: ['.github/workflows/sep-data-retrieval.yml']
+permissions:
+  contents: read
+jobs:
+  retrieve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install data readers
+        run: pip install -q pandas numpy pyarrow requests huggingface_hub yfinance
+      - name: Retrieve public research inputs
+        env:
+          HF_HUB_DISABLE_XET: '1'
+        run: |
+          python -u - <<'PY'
+          from pathlib import Path
+          import pandas as pd, requests, json, hashlib, traceback, time
+          from concurrent.futures import ThreadPoolExecutor, as_completed
+          import yfinance as yf
+          from huggingface_hub import hf_hub_download
+          out=Path('inputs'); out.mkdir()
+          manifest={}; errors=[]
+          def fetch(url,path):
+              r=requests.get(url,timeout=120);r.raise_for_status();Path(path).write_bytes(r.content)
+              manifest[str(path)]={'url':url,'bytes':len(r.content),'sha256':hashlib.sha256(r.content).hexdigest()}
+              return r
+          try:
+              url='https://raw.githubusercontent.com/fja05680/sp500/master/sp500_ticker_start_end.csv'
+              fetch(url,out/'membership.csv')
+              mem=pd.read_csv(out/'membership.csv')
+              print('MEMBERSHIP',mem.shape,flush=True)
+          except Exception as e:
+              errors.append('membership '+str(e));mem=pd.DataFrame()
+          try:
+              path=hf_hub_download(repo_id='finsaber-team/FINSABER-reproduce',repo_type='dataset',filename='data/price/all_sp500_prices_2000_2024_delisted_include.csv',revision='e156a6a5a36fce2eab49c3431eb0194ea85252b4')
+              h=hashlib.sha256()
+              with open(path,'rb') as f:
+                  for block in iter(lambda:f.read(1048576),b''):h.update(block)
+              manifest['historical_source']={'dataset':'finsaber-team/FINSABER-reproduce','revision':'e156a6a5a36fce2eab49c3431eb0194ea85252b4','sha256':h.hexdigest()}
+              chunks=[]
+              for ch in pd.read_csv(path,chunksize=500000):
+                  ch['date']=pd.to_datetime(ch['date'])
+                  ch=ch[ch['date']>='2010-01-01']
+                  if len(ch):chunks.append(ch)
+              hist=pd.concat(chunks,ignore_index=True)
+              hist.to_parquet(out/'historical.parquet',index=False)
+              print('HISTORICAL',hist.shape,hist.columns.tolist(),str(hist.date.min()),str(hist.date.max()),flush=True)
+              print(hist.head().to_string(),flush=True)
+              del hist,chunks
+          except Exception as e:
+              errors.append('historical '+str(e));traceback.print_exc()
+          try:
+              dates=pd.to_datetime(mem['end_date'],errors='coerce')
+              keep=mem[dates.isna() | (dates>='2023-01-01')]
+              symbols=sorted(set(keep['ticker'].astype(str).str.replace('.','-',regex=False)) | {'TQQQ','QQQ','SPY','BIL','SHV'})
+              rows=[];fail=[]
+              for i in range(0,len(symbols),40):
+                  batch=symbols[i:i+40]
+                  raw=yf.download(batch,start='2022-01-01',end='2026-09-25',auto_adjust=False,actions=True,progress=False,group_by='ticker',threads=8,timeout=25)
+                  for sym in batch:
+                      try:
+                          d=raw[sym].copy() if isinstance(raw.columns,pd.MultiIndex) else raw.copy()
+                          d=d.dropna(subset=['Close'])
+                          if d.empty:fail.append(sym);continue
+                          d.index=pd.to_datetime(d.index).tz_localize(None)
+                          d=d.reset_index().rename(columns={'Date':'date'});d['symbol']=sym;rows.append(d)
+                      except Exception:fail.append(sym)
+                  print('YAHOO_BATCH',i,len(symbols),'rows',sum(len(x) for x in rows),flush=True)
+              if rows:pd.concat(rows,ignore_index=True).to_parquet(out/'modern.parquet',index=False)
+              manifest['yahoo_missing_symbols']=fail
+              for sym in ['TQQQ','QQQ','SPY','BIL','SHV']:
+                  d=yf.download(sym,start='2010-01-01',end='2026-09-25',auto_adjust=False,actions=True,progress=False,threads=False,timeout=30)
+                  if isinstance(d.columns,pd.MultiIndex):d.columns=d.columns.get_level_values(0)
+                  d.to_csv(out/(sym+'.csv'))
+                  print('BENCHMARK',sym,len(d),flush=True)
+          except Exception as e:
+              errors.append('modern '+str(e));traceback.print_exc()
+          try:
+              fetch('https://fred.stlouisfed.org/graph/fredgraph.csv?id=DFF&cosd=2010-01-01&coed=2026-09-24',out/'DFF.csv')
+          except Exception as e:errors.append('DFF '+str(e))
+          try:
+              pdfdir=out/'sep';pdfdir.mkdir(exist_ok=True)
+              arr=requests.get('https://api.github.com/repos/nickchen494949/qqq-dashboard/contents/fomc_sep',timeout=60).json()
+              def getpdf(a):
+                  if a.get('name','').endswith('.pdf') and a['name']>='fomc_sep_2011':fetch(a['download_url'],pdfdir/a['name'])
+              with ThreadPoolExecutor(max_workers=8) as pool:list(pool.map(getpdf,arr))
+              for d in ['20260318','20260617','20260916']:
+                  try:fetch('https://www.federalreserve.gov/monetarypolicy/files/fomcprojtabl'+d+'.pdf',pdfdir/('official_'+d+'.pdf'))
+                  except Exception as e:errors.append('official SEP '+d+' '+str(e))
+              print('SEP_PDFS',len(list(pdfdir.glob('*.pdf'))),flush=True)
+          except Exception as e:errors.append('SEP '+str(e));traceback.print_exc()
+          manifest['errors']=errors
+          (out/'manifest.json').write_text(json.dumps(manifest,indent=2))
+          print('MANIFEST',json.dumps(manifest,indent=2),flush=True)
+          PY
+      - name: Preserve research inputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sep-historical-inputs
+          path: inputs/
+          retention-days: 7
+          compression-level: 1
