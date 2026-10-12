@@ -1,0 +1,43 @@
+{
+  "file_paths": 2777,
+  "unique_objects": 1389,
+  "logical_bytes": 1552175895,
+  "unique_bytes": 658318704,
+  "archive_count": 18,
+  "invalid_archives": [
+    {
+      "path": "Cashflow_Quality_Trial.zip",
+      "bytes": 13756822,
+      "sha256": "3de512a7fa9877a9f7a3dc9a43e054c28a552ca56533511d8eb105dd01212c66",
+      "valid_zip": false,
+      "issue": "ZIP central directory unreadable; original bytes retained; use expanded workspace"
+    },
+    {
+      "path": "ETF22_daily_2x_3x_test_20261011.zip",
+      "bytes": 9929265,
+      "sha256": "e25dc6c2a1ff189d7a6fa73b372d77123933413675f67d1f19fe5484e89d0fb8",
+      "valid_zip": false,
+      "issue": "ZIP central directory unreadable; original bytes retained; use expanded workspace"
+    },
+    {
+      "path": "ETF22_vs_SPY_QQQ_from_2009_20261011.zip",
+      "bytes": 10315934,
+      "sha256": "abf887e12e486f2a296af682be951029cbebad1d87292779940ebf595cf5a8da",
+      "valid_zip": false,
+      "issue": "ZIP central directory unreadable; original bytes retained; use expanded workspace"
+    },
+    {
+      "path": "Economic22_backtest_20261011.zip",
+      "bytes": 7485052,
+      "sha256": "48fc22990521dd823c132545ec666d0d6ff9eba50dee98456283fd3d3c707bef",
+      "valid_zip": false,
+      "issue": "ZIP central directory unreadable; original bytes retained; use expanded workspace"
+    }
+  ],
+  "scope": "Research workspace plus all valid archive member contents and invalid archive bytes; excludes transport helpers and transient duplicate check folders",
+  "checks": {
+    "credential_scan": "No credential patterns confirmed. Two SEC plain-text URLs containing the word risk matched an overly broad sk- pattern and were manually classified as false positives.",
+    "eps_frozen_replay": "Monthly EPS coverage reproduced from frozen events; NOT an EPS return backtest.",
+    "data_truth": "No claim of complete PIT data or independent market data verification."
+  }
+}

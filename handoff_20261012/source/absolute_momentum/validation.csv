@@ -1,0 +1,9 @@
+strategy,two_ledger_error,baseline_error
+QQQ_original,5.218048215738236e-15,4.440892098500626e-16
+QQQ_positive,5.218048215738236e-15,
+QQQ_positive_zero_cash,5.218048215738236e-15,
+QQQ_nonnegative,5.218048215738236e-15,
+SMH_original,5.662137425588298e-15,4.440892098500626e-16
+SMH_positive,7.105427357601002e-15,
+SMH_positive_zero_cash,5.88418203051333e-15,
+SMH_nonnegative,7.105427357601002e-15,

@@ -1,0 +1,7 @@
+numpy
+pandas>=2.2
+pyarrow
+lxml
+matplotlib
+beautifulsoup4
+exchange-calendars

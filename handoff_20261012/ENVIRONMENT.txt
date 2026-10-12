@@ -1,0 +1,9 @@
+Snapshot environment (not all optional packages installed):
+Python 3.12.14
+numpy==2.3.5
+pandas==2.2.3
+pyarrow==26.0.0
+lxml==6.1.1
+matplotlib==3.10.8
+beautifulsoup4: not installed in this snapshot runtime
+exchange-calendars: not installed in this snapshot runtime

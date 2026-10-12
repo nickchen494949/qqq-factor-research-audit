@@ -1,0 +1,3 @@
+Local restore verification: all 2777 manifest file paths passed object/part/archive SHA-256 checks.
+GitHub uploads: 74 binary/text Git blobs matched locally computed Git SHA-1 before publication.
+No new EPS returns backtest was performed.

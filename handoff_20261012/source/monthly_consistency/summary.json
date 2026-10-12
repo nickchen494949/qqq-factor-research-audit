@@ -1,0 +1,58 @@
+[
+  {
+    "fund": "SMH",
+    "months": 213,
+    "wins": 109,
+    "win_rate": 0.5117370892018779,
+    "positive_rate": 0.5915492957746479,
+    "benchmark_positive_rate": 0.6525821596244131,
+    "mean_excess": 0.017807731926449622,
+    "median_excess": 0.0015532492523657737,
+    "longest_losing_streak": [
+      11,
+      "2020-10",
+      "2021-08"
+    ],
+    "worst_month": "2018-10",
+    "worst_excess": -0.30058483753669796,
+    "best_month": "2026-05",
+    "best_excess": 0.6955879734110124,
+    "rolling_12m_wins": 124,
+    "rolling_12m_n": 202,
+    "rolling_12m_rate": 0.6138613861386139,
+    "rolling_36m_wins": 112,
+    "rolling_36m_n": 178,
+    "rolling_36m_rate": 0.6292134831460674,
+    "rolling_60m_wins": 117,
+    "rolling_60m_n": 154,
+    "rolling_60m_rate": 0.7597402597402597
+  },
+  {
+    "fund": "QQQ",
+    "months": 213,
+    "wins": 113,
+    "win_rate": 0.5305164319248826,
+    "positive_rate": 0.5727699530516432,
+    "benchmark_positive_rate": 0.6384976525821596,
+    "mean_excess": 0.01686249038025231,
+    "median_excess": 0.0052441802209790556,
+    "longest_losing_streak": [
+      5,
+      "2009-01",
+      "2009-05"
+    ],
+    "worst_month": "2021-12",
+    "worst_excess": -0.29086939687781543,
+    "best_month": "2021-01",
+    "best_excess": 0.6480001307109375,
+    "rolling_12m_wins": 97,
+    "rolling_12m_n": 202,
+    "rolling_12m_rate": 0.4801980198019802,
+    "rolling_36m_wins": 124,
+    "rolling_36m_n": 178,
+    "rolling_36m_rate": 0.6966292134831461,
+    "rolling_60m_wins": 115,
+    "rolling_60m_n": 154,
+    "rolling_60m_rate": 0.7467532467532467
+  }
+]

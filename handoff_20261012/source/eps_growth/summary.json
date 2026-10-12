@@ -1,0 +1,8 @@
+{
+  "candidate_rows": 26946,
+  "event_tickers": 143,
+  "earliest_public_event": "2011-05-12 00:00:00",
+  "earliest_event_with_actual_and_estimate": "2011-11-13 00:00:00",
+  "latest_public_event": "2026-10-08 00:00:00",
+  "verified_backtest_available": false
+}
